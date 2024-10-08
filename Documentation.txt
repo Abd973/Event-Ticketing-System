@@ -1,0 +1,119 @@
+Event Ticketing System - Documentation
+Overview:
+The Event Ticketing System is designed to facilitate event management, ticket purchasing, and sponsorship coordination. The system allows Admins to create and manage events, Sponsors to support multiple events, and Customers to purchase or return tickets for events.
+
+Key Features:
+User Management: Supports signing up as an Admin, Event Organizer, Sponsor, or Customer.
+Event Creation and Management: Admins can create, update, and delete events, setting ticket prices, locations, and dates.
+Ticket Sales: Customers can purchase tickets for events and return them if necessary.
+Sponsorship: Sponsors can sponsor multiple events, and each event can have multiple sponsors.
+Entities:
+1. Admin:
+Responsible for creating and managing events.
+Relationships:
+One-to-Many with Event (An admin can create many events).
+Fields:
+int adminId
+String name
+int age
+String email
+List<Event> events
+2. Event:
+Represents a single event in the system.
+Relationships:
+Many-to-One with Admin (Each event is created by one admin).
+Many-to-Many with Sponsor (Events can have multiple sponsors, and a sponsor can support multiple events).
+One-to-Many with Ticket (Each event can have multiple tickets).
+Fields:
+int eventId
+String title
+Date date
+String location
+String description
+Admin admin (The admin who created the event)
+List<Sponsor> sponsors (Sponsors of the event)
+List<Ticket> tickets (Tickets for the event)
+3. Customer:
+A user who can purchase and return tickets for events.
+Relationships:
+One-to-Many with Ticket (A customer can purchase many tickets).
+Fields:
+int customerId
+String name
+int age
+String email
+List<Ticket> tickets
+4. Ticket:
+Represents a ticket for an event.
+Relationships:
+Many-to-One with Event (Each ticket is associated with one event).
+Many-to-One with Customer (Each ticket is purchased by one customer).
+Fields:
+int ticketId
+float price
+String type (e.g., VIP, General)
+String status (e.g., Purchased, Available, Returned)
+Event event (The event the ticket is for)
+Customer customer (The customer who purchased the ticket)
+5. Sponsor:
+Companies or individuals that sponsor events.
+Relationships:
+Many-to-Many with Event (Sponsors can support multiple events, and events can have multiple sponsors).
+Fields:
+int sponsorId
+String name
+String email
+List<Event> events (The events sponsored by this sponsor)
+Database Design:
+Relationships:
+Admin-Event (One-to-Many):
+
+An admin can create multiple events, but each event is associated with one admin.
+Sponsor-Event (Many-to-Many):
+
+Multiple sponsors can sponsor an event, and a sponsor can be involved in multiple events. This relationship is managed through a join table (e.g., Event_Sponsors).
+Customer-Ticket (One-to-Many):
+
+A customer can purchase multiple tickets, but each ticket is associated with a single customer.
+Event-Ticket (One-to-Many):
+
+An event can have many tickets, but each ticket is linked to only one event.
+Entity Diagram Summary:
+Admin → Event (One-to-Many)
+Event → Ticket (One-to-Many)
+Event ↔ Sponsor (Many-to-Many)
+Customer → Ticket (One-to-Many)
+Technologies Used:
+Java (Spring Boot, JPA, Hibernate)
+MySQL (or any relational database of your choice)
+Spring Data JPA: For ORM mapping between entities and database.
+Spring Security + JWT: (Optional) For secure access and authentication.
+Docker: (Optional) For containerizing the application.
+Git: For version control.
+Suggested Enhancements:
+Authentication & Authorization:
+
+Use Spring Security with JWT to protect API endpoints and provide role-based access (e.g., only admins can create events).
+Event Search:
+
+Implement search functionality to allow users to search for events by criteria such as date, location, or type.
+Ticket Management:
+
+Add ticket return functionality for customers.
+Ensure ticket availability status updates when purchased or returned.
+API Endpoints:
+
+Implement RESTful APIs for:
+Admins to manage events.
+Customers to purchase or return tickets.
+Sponsors to sponsor events.
+Ensure proper validations for each operation.
+Example Use Cases:
+Admin creates a new event (e.g., a concert).
+Sponsors can sponsor the event (e.g., a company sponsors the concert).
+Customers purchase tickets for the event.
+Admins can update event details (e.g., change the date or location).
+Future Improvements:
+Reporting: Generate reports on ticket sales, event participation, etc.
+Notifications: Implement email or SMS notifications for customers after purchasing a ticket.
+Integration with Payment Gateway: Allow customers to pay for tickets using a third-party payment service.
