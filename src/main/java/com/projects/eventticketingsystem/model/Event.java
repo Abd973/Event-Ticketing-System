@@ -21,6 +21,6 @@ public class Event {
     private Admin admin;//admin who created the event
     @ManyToMany
     private List<Sponsor> sponsors;//sponsors who sponsored the event
-    @OneToMany
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ticket> tickets;//each event has many tickets
 }

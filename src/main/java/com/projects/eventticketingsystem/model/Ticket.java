@@ -14,13 +14,14 @@ public class Ticket {
     private int id;
     private float price;
     private String type;
+
     @Enumerated(EnumType.STRING)
     private TicketStatus status;
     @ManyToOne
     private Event event;
 
     public enum TicketStatus {
-        PURCHASED, RETURNED, AVAILABLE
+        PURCHASED, AVAILABLE
     }
 
 }

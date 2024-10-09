@@ -32,8 +32,19 @@ public class AdminService {
 
 
 
+
     public ResponseEntity<String> createEvent(Event event) {
         eventRepo.save(event);
+//        int adminId = event.getAdmin().getId();
+//        Admin admin = adminRepo.findById(adminId).get();
+//        admin.getEvents().add(event);
+//        adminRepo.save(admin);
+        List<Ticket> tickets = event.getTickets();
+        for (Ticket ticket : tickets) {
+            ticket.setEvent(event);
+            ticketRepo.save(ticket);
+        }
+
         return new ResponseEntity<>("succeed", HttpStatus.OK);
     }
 
