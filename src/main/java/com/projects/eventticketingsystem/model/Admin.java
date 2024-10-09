@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 public class Admin {
     @Id
-    private int adminId;
+    private int id;
     private String name;
     private int age;
     private String email;

@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 public class Ticket {
     @Id
-    private int ticketId;
+    private int id;
     private float price;
     private String type;
     @Enumerated(EnumType.STRING)

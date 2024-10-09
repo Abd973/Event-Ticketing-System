@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 public class Event {
     @Id
-    private int eventId;
+    private int id;
     private String title;
     private Date date;
     private String location;

@@ -1,9 +1,6 @@
 package com.projects.eventticketingsystem.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.List;
@@ -12,7 +9,9 @@ import java.util.List;
 @Data
 public class Customer {
     @Id
-    int customerId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     private String name;
     private int age;
     private String email;
